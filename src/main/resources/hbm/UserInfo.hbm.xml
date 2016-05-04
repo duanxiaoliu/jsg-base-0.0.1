@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+  <class table="USER" dynamic-update="true" dynamic-insert="true" name="com.jsg.base.model.UserInfo">
+    <id name="id" column="id" type="java.lang.String">
+      <generator class="uuid.hex"/>
+    </id>
+    <property name="name" column="NAME" type="java.lang.String"/>
+	<property name="cerNum" column="CERNUM" type="java.lang.String"/>
+	<property name="email" column="EMAIL" type="java.lang.String"/>
+	<property name="phone" column="PHONE" type="java.lang.String"/>
+	<property name="address" column="ADDRESS" type="java.lang.String"/>
+	<property name="birthday" column="BIRTHDAY" type="java.lang.String"/>
+	
+	<many-to-one name="genderDic" column="GENDER" class="com.jsg.base.model.BaseDic"/>
+	<many-to-one name="cerTypeDic" column="CERTYPE" class="com.jsg.base.model.BaseDic"/>
+	<many-to-one name="statusDic" column="STATUS" class="com.jsg.base.model.BaseDic" />
+    <many-to-one name="userTypeDic" column="USERTYPE" class="com.jsg.base.model.BaseDic"/>
+    <many-to-one name="userLogin" column="USERLOGIN" class="com.jsg.base.model.UserLoginInfo"/>
+    
+  </class>
+</hibernate-mapping>
