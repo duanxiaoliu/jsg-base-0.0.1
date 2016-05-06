@@ -34,6 +34,7 @@ import org.springframework.web.servlet.support.SessionFlashMapManager;
 import com.jsg.base.dao.IBaseDao;
 import com.jsg.base.model.BaseModel;
 import com.jsg.base.model.BasePage;
+import com.jsg.base.util.DataUtil;
 
 /**
  * 
@@ -58,7 +59,11 @@ public class BaseDaoImpl implements IBaseDao {
 	* @date 2016-4-25 下午1:53:56
 	 */
 	private Session getSession(){
-		return this.sessionFactory.getCurrentSession();
+		Session session = this.sessionFactory.getCurrentSession();
+		if(DataUtil.objIsNotNull(session)){
+			session = this.sessionFactory.openSession();
+		}
+		return session;
 	}
 	/**
 	 * 

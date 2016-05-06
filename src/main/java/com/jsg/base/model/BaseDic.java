@@ -1,5 +1,8 @@
 package com.jsg.base.model;
 
-public class BaseDic extends BaseModel{
+import java.io.Serializable;
 
+public class BaseDic extends BaseModel implements Serializable{
+	
+	private String id;
 }
