@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 
 import com.jsg.base.dao.IUserDao;
 import com.jsg.base.model.UserInfo;
+import com.jsg.base.model.UserLoginInfo;
 import com.jsg.base.service.IUserService;
 
 @Service("userService")
@@ -20,7 +21,7 @@ public class UserServiceImpl implements IUserService {
 
 	@Override
 	public void saveUserInfo(UserInfo userInfo) {
-		// TODO Auto-generated method stub
+		this.userDao.save(userInfo);
 
 	}
 
@@ -46,6 +47,12 @@ public class UserServiceImpl implements IUserService {
 	public UserInfo getUserInfoById(String id) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public void saveUserLoginInfo(UserLoginInfo loginInfo) {
+		this.userDao.save(loginInfo);
+		
 	}
 
 }

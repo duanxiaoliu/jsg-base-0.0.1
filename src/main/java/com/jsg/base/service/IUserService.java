@@ -1,6 +1,7 @@
 package com.jsg.base.service;
 
 import com.jsg.base.model.UserInfo;
+import com.jsg.base.model.UserLoginInfo;
 /**
  * 
 * @ClassName: IUserService 
@@ -78,4 +79,14 @@ public interface IUserService extends IBaseService{
 	* @date 2016-5-6 下午2:31:46
 	 */
 	UserInfo getUserInfoById(String id);
+	/**
+	 * 
+	* @Title: saveUserLoginInfo 
+	* @Description: TODO(保存用户登录信息) 
+	* @param @param loginInfo 
+	* @return void
+	* @author duanws
+	* @throws
+	 */
+	void saveUserLoginInfo(UserLoginInfo loginInfo);
 }

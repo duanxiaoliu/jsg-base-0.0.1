@@ -67,6 +67,54 @@ public class LoginController extends BaseController {
 	}
 	/**
 	 * 
+	* @Title: toRegister 
+	* @Description: TODO(跳转到登录页面) 
+	* @param @param request
+	* @param @param response
+	* @param @return 
+	* @return String
+	* @author duanws
+	* @throws
+	 */
+	@RequestMapping({"toRegister"})
+	public String toRegister(HttpServletRequest request,HttpServletResponse response){
+		
+		return "login/register";
+	}
+	/**
+	 * 
+	* @Title: saveRegister 
+	* @Description: TODO(保存注册信息) 
+	* @param @param request
+	* @param @param response
+	* @param @param model
+	* @param @return 
+	* @return String
+	* @author duanws
+	* @throws
+	 */
+	@RequestMapping({"saveRegister"})
+	public @ResponseBody String saveRegister(HttpServletRequest request,HttpServletResponse response,ModelMap model,UserInfo userInfo){
+		String msg = "success";
+		//登录名
+		String loginName = request.getParameter("loginName");
+		//密码
+		String password = request.getParameter("password");
+		UserLoginInfo loginInfo = new UserLoginInfo();
+		if(DataUtil.strIsNotNull(loginName) && DataUtil.strIsNotNull(password)){
+			loginInfo.setLoginName(loginName);
+			loginInfo.setPassword(password);
+			this.userService.saveUserLoginInfo(loginInfo);
+			
+		}else{
+			msg = "error";
+		}
+		return msg;
+	}
+	
+	
+	/**
+	 * 
 	* @Title: toMain 
 	* @Description: TODO(登录成功，跳转主页面) 
 	* @param @param request

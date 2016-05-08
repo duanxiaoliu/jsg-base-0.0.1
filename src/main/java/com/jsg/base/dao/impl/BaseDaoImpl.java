@@ -132,6 +132,7 @@ public class BaseDaoImpl implements IBaseDao {
 		//设置修改时间
 		paramModel.setUpdateTime(new Date());
 		this.getSession().save(paramModel);
+		this.getSession().flush();
 
 	}
 
