@@ -2,6 +2,7 @@ package com.jsg.base.controller;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -31,6 +32,8 @@ public class LoginController extends BaseController {
 
 	@RequestMapping({"login"})
 	public String login(HttpServletRequest request,HttpServletResponse response,ModelMap model,UserInfo userInfo){
+		String contextPath = request.getSession().getServletContext().getContextPath();
+		request.getSession().setAttribute("contextPath", contextPath);
 		return "login/login";
 	}
 	/**
@@ -60,6 +63,8 @@ public class LoginController extends BaseController {
 			UserInfo loginUser = this.userService.getUserInfo(userInfo);
 			if(DataUtil.objIsNotNull(loginUser)){
 				msg = "success";
+				HttpSession session = request.getSession();
+				session.setAttribute("user_key", loginUser.getUserLogin().getLoginName());
 			}
 		}
 		return msg;
@@ -105,7 +110,8 @@ public class LoginController extends BaseController {
 			loginInfo.setLoginName(loginName);
 			loginInfo.setPassword(password);
 			this.userService.saveUserLoginInfo(loginInfo);
-			
+			userInfo.setUserLogin(loginInfo);
+			this.userService.saveUserInfo(userInfo);
 		}else{
 			msg = "error";
 		}

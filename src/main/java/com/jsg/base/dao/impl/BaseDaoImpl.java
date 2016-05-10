@@ -60,7 +60,7 @@ public class BaseDaoImpl implements IBaseDao {
 	 */
 	private Session getSession(){
 		Session session = this.sessionFactory.getCurrentSession();
-		if(DataUtil.objIsNotNull(session)){
+		if(!DataUtil.objIsNotNull(session)){
 			session = this.sessionFactory.openSession();
 		}
 		return session;

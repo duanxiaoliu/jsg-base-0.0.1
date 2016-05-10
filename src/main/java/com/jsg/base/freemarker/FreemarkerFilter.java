@@ -16,7 +16,7 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.servlet.View;
 import org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver;
 
-import com.jsg.base.util.SpringBeanLocator;
+import com.jsg.base.filter.SpringBeanLocator;
 /**
  * 
 * @ClassName: FreemarkerFilter 

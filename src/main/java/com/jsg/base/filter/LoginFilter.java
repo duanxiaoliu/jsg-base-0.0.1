@@ -37,7 +37,6 @@ public class LoginFilter implements HandlerInterceptor{
 	      }
 
 	    }
-	    System.out.println("Pre-handle");  
 
 	    if (session.getAttribute("user_key") == null) {
 	    response.sendRedirect(request.getContextPath() + "/login.do");
@@ -50,7 +49,6 @@ public class LoginFilter implements HandlerInterceptor{
 	public void postHandle(HttpServletRequest request,  
 	        HttpServletResponse response, Object handler,  
 	        ModelAndView modelAndView) throws Exception {  
-	    System.out.println("Post-handle");  
 	}  
 	  
 	@Override  

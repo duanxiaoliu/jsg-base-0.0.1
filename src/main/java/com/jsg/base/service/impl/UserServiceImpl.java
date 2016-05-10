@@ -1,5 +1,7 @@
 package com.jsg.base.service.impl;
 
+import org.springframework.transaction.annotation.Transactional; 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -48,7 +50,7 @@ public class UserServiceImpl implements IUserService {
 		// TODO Auto-generated method stub
 		return null;
 	}
-
+	
 	@Override
 	public void saveUserLoginInfo(UserLoginInfo loginInfo) {
 		this.userDao.save(loginInfo);
