@@ -1,32 +1,29 @@
 package com.jsg.base.model;
 
 import java.io.Serializable;
-/**
- * 
-* @ClassName: BaseDic 
-* @Description: TODO(数据字典) 
-* @author duanws
-* @date 2016-5-11 下午2:10:35 
-*
- */
-public class BaseDic extends BaseModel implements Serializable{
-	
+
+public class DicCategory extends BaseModel implements Serializable{
+
 	/** 
 	* @Fields serialVersionUID : TODO() 
 	*/ 
 	private static final long serialVersionUID = 1L;
 	private String id;
-	//名称
+	//分类名称
 	private String name;
-	//代码
+	//分类代码
 	private String code;
-	//状态
+	//分类状态
 	private String status;
-	//排序
-	private int seqNum;
-	//分类
-	private DicCategory dicCategory;
+	//分类类型
+	private String cateGroryType;
 	
+	public String getCateGroryType() {
+		return cateGroryType;
+	}
+	public void setCateGroryType(String cateGroryType) {
+		this.cateGroryType = cateGroryType;
+	}
 	public String getId() {
 		return id;
 	}
@@ -50,18 +47,6 @@ public class BaseDic extends BaseModel implements Serializable{
 	}
 	public void setStatus(String status) {
 		this.status = status;
-	}
-	public int getSeqNum() {
-		return seqNum;
-	}
-	public void setSeqNum(int seqNum) {
-		this.seqNum = seqNum;
-	}
-	public DicCategory getDicCategory() {
-		return dicCategory;
-	}
-	public void setDicCategory(DicCategory dicCategory) {
-		this.dicCategory = dicCategory;
 	}
 	
 }

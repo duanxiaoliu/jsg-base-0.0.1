@@ -13,6 +13,13 @@
 	<property name="address" column="ADDRESS" type="java.lang.String"/>
 	<property name="birthday" column="BIRTHDAY" type="java.lang.String"/>
 	
+	<property name="createTime" type="timestamp">
+       <column name="CREATE_TIME" length="19" />
+    </property>
+    <property name="updateTime" type="timestamp">
+       <column name="UPDATE_TIME" length="19" />
+    </property>
+	
 	<many-to-one name="genderDic" column="GENDER" class="com.jsg.base.model.BaseDic"/>
 	<many-to-one name="cerTypeDic" column="CERTYPE" class="com.jsg.base.model.BaseDic"/>
 	<many-to-one name="statusDic" column="STATUS" class="com.jsg.base.model.BaseDic" />

@@ -2,6 +2,7 @@ package com.jsg.base.controller;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -14,6 +15,7 @@ public class UserController extends BaseController {
 	
 	@RequestMapping({"userManage/userManage/queryUserInfo"})
 	public String queryUserInfo(HttpServletRequest request,HttpServletResponse response,ModelMap model,UserInfo userInfo){
+
 		
 		return "userManage/userManage/queryUserInfo";
 	}

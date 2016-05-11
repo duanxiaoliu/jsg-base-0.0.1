@@ -31,6 +31,12 @@ public class LoginFilter implements HandlerInterceptor{
 	    String urlPath = request.getContextPath();
 	    session.setAttribute("urlPath", urlPath);
 	    session.setAttribute("session", session);
+	    //操作左侧菜单列表
+		String menuPid = request.getParameter("menuPid");
+		String menuId = request.getParameter("menuId");
+		session.setAttribute("menuPid", menuPid);
+		session.setAttribute("menuId", menuId);
+		
 	    for (String url : this.excludedUrls) {
 	      if (pathsMatch(url, request)) {
 	        return true;

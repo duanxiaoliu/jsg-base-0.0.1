@@ -2,14 +2,16 @@
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 
 <hibernate-mapping>
-  <class table="BASE_DIC"  name="com.jsg.base.model.BaseDic">
+  <class table="DIC_CATEGORY"  name="com.jsg.base.model.DicCategory">
     <id name="id" column="ID" type="java.lang.String">
       <generator class="uuid.hex"/>
     </id>
   	<property name="name" column="NAME" type="java.lang.String"/>
   	<property name="code" column="CODE" type="java.lang.String"/>
   	<property name="status" column="STATUS" type="java.lang.String"/>
-  	<property name="seqNum" column="SEQNUM" type="java.lang.Integer"/>
+  	<property name="cateGroryType" column="CATEGORY_TYPE" type="java.lang.String"/>
+  	
+  	
   	<property name="createTime" type="timestamp">
        <column name="CREATE_TIME" length="19" />
     </property>
@@ -17,6 +19,5 @@
        <column name="UPDATE_TIME" length="19" />
     </property>
     
-    <many-to-one name="dicCategory" column="DIC_CATEGORY" class="com.jsg.base.model.DicCategory"/>
   </class>
 </hibernate-mapping>

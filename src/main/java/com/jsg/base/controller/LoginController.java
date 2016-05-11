@@ -133,6 +133,7 @@ public class LoginController extends BaseController {
 	 */
 	@RequestMapping({"toMain"})
 	public String toMain(HttpServletRequest request,HttpServletResponse response){
+
 		return "main/index";
 	}
 	
