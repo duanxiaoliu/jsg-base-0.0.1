@@ -30,6 +30,8 @@ public abstract interface IBaseDao {
 	* @date 2016-4-22 下午2:21:17
 	 */
 	public abstract List queryList(String sqlString, Object[] paramObject);
+	
+	public abstract BaseModel get(Class paramClass,Serializable id);
 	/**
 	 * 
 	* @Title: queryUnique 
@@ -174,7 +176,6 @@ public abstract interface IBaseDao {
     
     public abstract boolean isUnique(Class paramClass,BaseModel paramModel,String [] paramArrayOfString);
     
-    public abstract BaseModel get(Class paramClass,BaseModel paramModel,String [] paramString);
     
     public abstract long queryCount(String paramStirng,Object[] paramObject);
     

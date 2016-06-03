@@ -3,6 +3,7 @@ package com.jsg.base.controller;
 import javax.jws.WebParam.Mode;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -12,28 +13,19 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.jsg.base.model.BaseDic;
 import com.jsg.base.model.BasePage;
 import com.jsg.base.model.DicCategory;
-import com.jsg.base.service.IDicService;
+import com.jsg.base.service.IDicInfoService;
 import com.jsg.base.util.DataUtil;
 import com.jsg.base.util.PageUtil;
 
-/**
- * 
-* @ClassName: DicController 
-* @Description: TODO(数据字典管理) 
-* @author duanws
-* @date 2016-5-11 下午2:47:32 
-*
- */
+
 @Controller
 public class DicController extends BaseController {
-	
 	@Autowired
-	private IDicService dicSerivce;
-	
+	private IDicInfoService dicInfoService;
 	/**
 	 * 
-	* @Title: queryDicCategoryPage 
-	* @Description: TODO(查询数据字典信息) 
+	* @Title: queryDicInfo 
+	* @Description: TODO(通过字典分类查询字典) 
 	* @param @param request
 	* @param @param response
 	* @param @param model
@@ -42,57 +34,76 @@ public class DicController extends BaseController {
 	* @return String
 	* @throws 
 	* @author duanws
-	* @date 2016-5-11 下午2:49:43
+	* @date 2016-6-1 下午4:45:19
 	 */
-	@RequestMapping({"dicManage/dicManage/queryDicCategory"})
-	public String queryDicCategoryPage(HttpServletRequest request,HttpServletResponse response,ModelMap model,DicCategory dicCategory){
+	@RequestMapping({"dicManage/dicInfoManage/ope-query/queryDicInfo"})
+	public String queryDicInfo(HttpServletRequest request,HttpServletResponse response,ModelMap model,BaseDic baseDic){
+		String dicCategoryId = request.getParameter("dicCategoryId");
+		String flag = request.getParameter("flag");
+		HttpSession session = request.getSession();
+		if(DataUtil.strIsNotNull(dicCategoryId)){
+			DicCategory dicCategory = new DicCategory();
+			dicCategory.setId(dicCategoryId);
+			baseDic.setDicCategory(dicCategory);
+		}
+		
 		String pageNo = (request.getParameter("pageNo")!=null)?request.getParameter("pageNo"):"1";
-		
-		BasePage page = this.dicSerivce.queryDicCategory(dicCategory, Integer.parseInt(pageNo), BasePage.DEFAULT_PAGE_SIZE);
+		BasePage page = this.dicInfoService.getDicInfoListById(Integer.parseInt(pageNo), BasePage.DEFAULT_PAGE_SIZE, baseDic);
 		String pageTag = PageUtil.getPageInfo((int)page.getTotalPageCount(),(int)page.getTotalCount());
-		
+		if(DataUtil.strIsNotNull(flag) && flag.equals("1")){
+			BaseDic baseDicB = (BaseDic) session.getAttribute("baseDicB");
+			if(DataUtil.objIsNotNull(baseDicB)){
+				baseDic = baseDicB;
+			}
+		}
+		session.setAttribute("baseDicB", baseDic);
 		model.addAttribute("pageTag", pageTag);
 		model.addAttribute("page", page);
-		model.addAttribute("dicCategory", dicCategory);
+		this.setData(baseDic, model);
 		
-		return "dicManage/dicManage/queryDicCategory";
+		return "dicManage/dicInfoManage/queryDicInfo";
 	}
 	/**
 	 * 
-	* @Title: editDicCategory 
-	* @Description: TODO(跳转到编辑页面) 
+	* @Title: editDicInfo 
+	* @Description: TODO(新增，修改跳转) 
 	* @param @param request
 	* @param @param response
 	* @param @param model
+	* @param @param baseDic
 	* @param @return
 	* @return String
 	* @throws 
 	* @author duanws
-	* @date 2016-5-26 下午2:19:25
+	* @date 2016-6-3 下午4:05:12
 	 */
-	@RequestMapping({"dicManage/dicManage/jsg-add/addDicCategory","dicManage/dicManage/jsg-update/editDicCategory"})
-	public String editDicCategory(HttpServletRequest request,HttpServletResponse response,ModelMap model){
-		String dicCateGoryId = request.getParameter("id");
-		DicCategory dicCategory = new DicCategory();
-		if(DataUtil.strIsNotNull(dicCateGoryId)){
-			dicCategory = this.dicSerivce.getDicCateGoryById(dicCateGoryId);
-		}	
-		this.setData(dicCategory, model);
-		return "dicManage/dicManage/editDicCategory";
+	@RequestMapping({"dicManage/dicInfoManage/ope-add/addDicInfo","dicManage/dicInfoManage/ope-update/editDicInfo"})
+	public String editDicInfo(HttpServletRequest request,HttpServletResponse response,ModelMap model,BaseDic baseDic){
+		String dicId = request.getParameter("id");
+		if(DataUtil.strIsNotNull(dicId)){
+			//修改
+			BaseDic eBaseDic = this.dicInfoService.getDicInfoById(dicId);
+			this.setData(eBaseDic, model);
+		}else{
+			this.setData(baseDic, model);
+		}
+		
+		return "dicManage/dicInfoManage/editDicInfo";
 	}
+	
 	/**
 	 * 
 	* @Title: setData 
 	* @Description: TODO(封闭页面显示元素) 
-	* @param @param dicCategory
+	* @param @param baseDic
 	* @param @param model
 	* @return void
 	* @throws 
 	* @author duanws
-	* @date 2016-5-26 下午2:28:34
+	* @date 2016-6-3 下午2:09:38
 	 */
-	private void setData(DicCategory dicCategory,ModelMap model){
-		model.addAttribute("dicCategory", dicCategory);
+	private void setData(BaseDic baseDic,ModelMap model){
+		
+		
 	}
-	
 }

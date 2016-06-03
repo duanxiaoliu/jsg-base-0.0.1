@@ -26,4 +26,28 @@ public class DicServiceImpl implements IDicService {
 			int pageSize) {
 		return this.dicDao.queryDicCategory(dicCategory, pageNo, pageSize);
 	}
+
+	@Override
+	public DicCategory getDicCateGoryById(String id) {
+		
+		return (DicCategory) this.dicDao.get(DicCategory.class, id);
+	}
+
+	@Override
+	public void saveDicCategory(DicCategory dicCategory) {
+		this.dicDao.save(dicCategory);
+		
+	}
+
+	@Override
+	public void updateDicCategory(DicCategory dicCategory) {
+		this.dicDao.update(dicCategory);
+		
+	}
+
+	@Override
+	public void delDicCategoryById(String id) {
+		this.dicDao.delDicCategoryById(id);
+		
+	}
 }

@@ -8,7 +8,6 @@ public class DicCategory extends BaseModel implements Serializable{
 	* @Fields serialVersionUID : TODO() 
 	*/ 
 	private static final long serialVersionUID = 1L;
-	private String id;
 	//分类名称
 	private String name;
 	//分类代码
@@ -23,12 +22,6 @@ public class DicCategory extends BaseModel implements Serializable{
 	}
 	public void setCateGroryType(String cateGroryType) {
 		this.cateGroryType = cateGroryType;
-	}
-	public String getId() {
-		return id;
-	}
-	public void setId(String id) {
-		this.id = id;
 	}
 	public String getName() {
 		return name;

@@ -39,4 +39,10 @@ public class dicDaoImpl extends BaseDaoImpl implements IDicDao {
 		return page;
 	}
 
+	@Override
+	public void delDicCategoryById(String id) {
+		String hql = " delete from DicCategory dc where dc.id='"+id+"'";
+		this.executeHql(hql, new Object[0]);
+	}
+
 }

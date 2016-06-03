@@ -25,5 +25,17 @@ public interface IDicDao extends IBaseDao {
 	* @date 2016-5-11 下午5:13:28
 	 */
 	BasePage queryDicCategory(DicCategory dicCategory,int pageNo,int pageSize);
+	
+	/**
+	 * 
+	* @Title: delDicCategoryById 
+	* @Description: TODO(通过id删除字典分类) 
+	* @param @param id
+	* @return void
+	* @throws 
+	* @author duanws
+	* @date 2016-5-30 下午2:08:14
+	 */
+	void delDicCategoryById(String id);
 
 }

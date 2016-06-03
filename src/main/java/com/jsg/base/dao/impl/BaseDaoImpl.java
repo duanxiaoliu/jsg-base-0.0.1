@@ -120,8 +120,9 @@ public class BaseDaoImpl implements IBaseDao {
 	//更新实体类记录
 	public void update(BaseModel paramModel) {
 		//设置修改时间
-		paramModel.setCreateTime(new Date());
+		paramModel.setUpdateTime(new Date());
 		this.getSession().update(paramModel);
+		this.getSession().flush();
 	}
 
 	@Override
@@ -355,12 +356,6 @@ public class BaseDaoImpl implements IBaseDao {
 		return query;
 	}
 	
-	@Override
-	public BaseModel get(Class paramClass, BaseModel paramModel,
-			String[] paramString) {
-		
-		return null;
-	}
 
 	@Override
 	public long queryCount(String sqlString, Object[] paramObject) {
