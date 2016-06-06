@@ -67,4 +67,32 @@ public interface IDicInfoService extends IBaseService {
 	* @date 2016-6-3 下午2:02:14
 	 */
 	void updateDicInfo(BaseDic baseDic);
+	/**
+	 * 
+	* @Title: isExistDicCode 
+	* @Description: TODO(验证数据字典是否唯一) 
+	* @param @param id
+	* @param @param code
+	* @param @param dicCategoryId
+	* @param @return
+	* @return boolean
+	* @throws 
+	* @author duanws
+	* @date 2016-6-6 下午3:12:10
+	 */
+	boolean isExistDicCode(String id,String code,String dicCategoryId);
+	/**
+	 * 
+	* @Title: isExistDicName 
+	* @Description: TODO(验证数据字典名称是否唯一) 
+	* @param @param id
+	* @param @param name
+	* @param @param dicCategoryId
+	* @param @return
+	* @return boolean
+	* @throws 
+	* @author duanws
+	* @date 2016-6-6 下午3:12:14
+	 */
+	boolean isExistDicName(String id,String name,String dicCategoryId);
 }

@@ -90,7 +90,29 @@ public class DicController extends BaseController {
 		
 		return "dicManage/dicInfoManage/editDicInfo";
 	}
-	
+	/**
+	 * 
+	* @Title: saveDicInfo 
+	* @Description: TODO(保存数据字典信息) 
+	* @param @param request
+	* @param @param baseDic
+	* @param @param model
+	* @param @return
+	* @return String
+	* @throws 
+	* @author duanws
+	* @date 2016-6-6 下午2:04:25
+	 */
+	@RequestMapping({"dicManage/dicInfoManage/ope-save/saveDicInfo"})
+	public String saveDicInfo(HttpServletRequest request,BaseDic baseDic,ModelMap model){
+		String dicId = baseDic.getId();
+		if(DataUtil.strIsNotNull(dicId)){
+			this.dicInfoService.updateDicInfo(baseDic);
+		}else{
+			this.dicInfoService.saveDicInfo(baseDic);
+		}
+		return "redirect:/dicManage/dicInfoManage/ope-query/queryDicInfo.do";
+	}
 	/**
 	 * 
 	* @Title: setData 
