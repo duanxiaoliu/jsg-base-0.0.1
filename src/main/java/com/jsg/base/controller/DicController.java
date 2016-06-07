@@ -1,5 +1,8 @@
 package com.jsg.base.controller;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.jws.WebParam.Mode;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -9,7 +12,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
 import com.jsg.base.model.BaseDic;
 import com.jsg.base.model.BasePage;
 import com.jsg.base.model.DicCategory;
@@ -113,6 +119,80 @@ public class DicController extends BaseController {
 		}
 		return "redirect:/dicManage/dicInfoManage/ope-query/queryDicInfo.do";
 	}
+	/**
+	 * 
+	* @Title: startDic 
+	* @Description: TODO(启用数据字典) 
+	* @param @param request
+	* @param @param response
+	* @param @return
+	* @return String
+	* @throws 
+	* @author duanws
+	* @date 2016-6-7 上午11:20:38
+	 */
+	@RequestMapping(value={"dicManage/dicInfoManage/ope-update/startDic"},produces={"text/plain;charset=UTF-8"})
+	public @ResponseBody String startDic(HttpServletRequest request,HttpServletResponse response){
+		String id = request.getParameter("id");
+		BaseDic baseDic = this.dicInfoService.getDicInfoById(id);
+		if(DataUtil.objIsNotNull(baseDic)){
+			baseDic.setStatus("1");
+			this.dicInfoService.updateDicInfo(baseDic);
+			baseDic.setComments("success");
+		}
+		baseDic.setDicCategory(null);
+		String jsonStr = JSONObject.fromObject(baseDic).toString();
+		return jsonStr;
+	} 
+	/**
+	 * 
+	* @Title: stopDic 
+	* @Description: TODO(禁用数据字典) 
+	* @param @param request
+	* @param @param response
+	* @param @return
+	* @return String
+	* @throws 
+	* @author duanws
+	* @date 2016-6-7 上午11:20:56
+	 */
+	@RequestMapping(value={"dicManage/dicInfoManage/ope-update/stopDic"},produces={"text/plain;charset=UTF-8"})
+	public @ResponseBody String stopDic(HttpServletRequest request,HttpServletResponse response){
+		String id = request.getParameter("id");
+		BaseDic baseDic = this.dicInfoService.getDicInfoById(id);
+		if(DataUtil.objIsNotNull(baseDic)){
+			baseDic.setStatus("0");
+			this.dicInfoService.updateDicInfo(baseDic);
+			baseDic.setComments("success");
+		}
+		baseDic.setId(baseDic.getId());
+		baseDic.setName(baseDic.getName());
+		baseDic.setDicCategory(null);
+		String jsonStr = JSONObject.fromObject(baseDic).toString();
+		return jsonStr;
+	} 
+	/**
+	 * 
+	* @Title: delDicInfo 
+	* @Description: TODO(删除数据字典) 
+	* @param @param request
+	* @param @return
+	* @return String
+	* @throws 
+	* @author duanws
+	* @date 2016-6-7 下午4:27:20
+	 */
+	@RequestMapping(value={"dicManage/dicInfoManage/ope-del/delDicInfo"},produces={"text/plain;charset=UTF-8"})
+	public @ResponseBody String delDicInfo(HttpServletRequest request){
+		String id = request.getParameter("id");
+		try{
+			this.dicInfoService.delDicInfoById(id);
+		}catch(Exception e){
+			return "error";
+		}
+		return "success";
+	}
+	
 	/**
 	 * 
 	* @Title: setData 
