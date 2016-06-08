@@ -95,4 +95,28 @@ public interface IDicInfoService extends IBaseService {
 	* @date 2016-6-6 下午3:12:14
 	 */
 	boolean isExistDicName(String id,String name,String dicCategoryId);
+	/**
+	 * 
+	* @Title: upDicInfo 
+	* @Description: TODO(上移数据字典) 
+	* @param @param id
+	* @param @param dicCategoryId
+	* @return void
+	* @throws 
+	* @author duanws
+	* @date 2016-6-8 上午11:28:51
+	 */
+	void upDicInfo(String id,String dicCategoryId);
+	/**
+	 * 
+	* @Title: downDicInfo 
+	* @Description: TODO(下移数据字典) 
+	* @param @param id
+	* @param @param dicCategoryId
+	* @return void
+	* @throws 
+	* @author duanws
+	* @date 2016-6-8 上午11:29:00
+	 */
+	void downDicInfo(String id,String dicCategoryId);
 }

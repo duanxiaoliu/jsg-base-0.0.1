@@ -1,6 +1,7 @@
 package com.jsg.base.controller;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.jws.WebParam.Mode;
 import javax.servlet.http.HttpServletRequest;
@@ -161,7 +162,50 @@ public class DicCategoryController extends BaseController {
 		this.setData(dicCategory, model);
 		return "dicManage/dicManage/viewDicCategory";
 	}
-	
+	/**
+	 * 
+	* @Title: checkDicCategoryNameExist 
+	* @Description: TODO(验证分类名称是否唯一) 
+	* @param @param request
+	* @param @param response
+	* @param @return
+	* @return String
+	* @throws 
+	* @author duanws
+	* @date 2016-6-8 下午4:52:58
+	 */
+	@RequestMapping(value={"dicManage/dicManage/ope-check/checkDicCategoryNameExist"},produces={"text/plain;charset=UTF-8"})
+	public @ResponseBody String checkDicCategoryNameExist(HttpServletRequest request,HttpServletResponse response){
+		String name = request.getParameter("name");
+		String id = request.getParameter("id");
+		boolean checkResult = this.dicSerivce.isExistDicCategoryName(id, name);
+		if(checkResult){
+			return "true";
+		}
+		return "false";
+	}
+	/**
+	 * 
+	* @Title: checkDicCategoryCodeExist 
+	* @Description: TODO(验证分类代码是否唯一) 
+	* @param @param request
+	* @param @param response
+	* @param @return
+	* @return String
+	* @throws 
+	* @author duanws
+	* @date 2016-6-8 下午4:54:06
+	 */
+	@RequestMapping(value={"dicManage/dicManage/ope-check/checkDicCategoryCodeExist"},produces={"text/plain;charset=UTF-8"})
+	public @ResponseBody String checkDicCategoryCodeExist(HttpServletRequest request,HttpServletResponse response){
+		String code = request.getParameter("code");
+		String id = request.getParameter("id");
+		boolean checkResult = this.dicSerivce.isExistDicCategoryCode(id, code);
+		if(checkResult){
+			return "true";
+		}
+		return "false";
+	}
 	/**
 	 * 
 	* @Title: setData 

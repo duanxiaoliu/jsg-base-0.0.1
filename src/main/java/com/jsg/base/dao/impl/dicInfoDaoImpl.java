@@ -26,7 +26,17 @@ public class dicInfoDaoImpl extends BaseDaoImpl implements IDicInfoDao {
 		if(DataUtil.strIsNotNull(baseDic.getStatus())){
 			hql.append(" and bd.status='"+baseDic.getStatus()+"'");
 		}
+		if(DataUtil.strIsNotNull(baseDic.getDicCategory().getId())){
+			hql.append(" and bd.dicCategory.id='"+baseDic.getDicCategory().getId()+"'");
+		}
+		hql.append(" order by bd.seqNum");
 		return this.queryPage(hql.toString(), pageNo, pageSize,  new Object[0]);
+	}
+
+	@Override
+	public List<BaseDic> getDicInfoListByCategoryId(String dicCategoryId) {
+		String hql = " from BaseDic bd where bd.dicCategory.id='"+dicCategoryId+"' order by bd.seqNum ";
+		return this.queryList(hql, new Object[0]);
 	}
 
 	

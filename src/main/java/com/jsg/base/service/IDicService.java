@@ -63,4 +63,32 @@ public interface IDicService extends IBaseService {
 	* @date 2016-5-30 下午2:08:14
 	 */
 	void delDicCategoryById(String id);
+	/**
+	 * 
+	* @Title: isExistDicCode 
+	* @Description: TODO(验证数据字典分类是否唯一) 
+	* @param @param id
+	* @param @param code
+	* @param @param dicCategoryId
+	* @param @return
+	* @return boolean
+	* @throws 
+	* @author duanws
+	* @date 2016-6-6 下午3:12:10
+	 */
+	boolean isExistDicCategoryCode(String id,String code);
+	/**
+	 * 
+	* @Title: isExistDicName 
+	* @Description: TODO(验证数据字典分类名称是否唯一) 
+	* @param @param id
+	* @param @param name
+	* @param @param dicCategoryId
+	* @param @return
+	* @return boolean
+	* @throws 
+	* @author duanws
+	* @date 2016-6-6 下午3:12:14
+	 */
+	boolean isExistDicCategoryName(String id,String name);
 }

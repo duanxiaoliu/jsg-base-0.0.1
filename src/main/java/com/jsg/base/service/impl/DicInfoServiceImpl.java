@@ -99,4 +99,48 @@ public class DicInfoServiceImpl implements IDicInfoService {
 		return true;
 	}
 
+	@Override
+	public void upDicInfo(String id, String dicCategoryId) {
+		List<BaseDic> list = this.dicInfoDao.getDicInfoListByCategoryId(dicCategoryId);
+		if(list != null && list.size()>1){
+			for(int i=0;i<list.size();i++){
+				if(list.get(i).getId().equals(id) || list.get(i).getId()==id){
+					//列表中上一个对象存在时才进行操作
+					if(i-1>=0 && list.get(i-1)!=null){
+						BaseDic baseDic = list.get(i);
+						int tempNum = baseDic.getSeqNum();
+						BaseDic baseDicB = list.get(i-1);
+						baseDic.setSeqNum(baseDicB.getSeqNum());
+						baseDicB.setSeqNum(tempNum);
+						this.dicInfoDao.update(baseDic);
+						this.dicInfoDao.update(baseDicB);
+					}
+				}
+			}
+		}
+		
+	}
+
+	@Override
+	public void downDicInfo(String id, String dicCategoryId) {
+		List<BaseDic> list = this.dicInfoDao.getDicInfoListByCategoryId(dicCategoryId);
+		if(list != null && list.size()>1){
+			for(int i=0;i<list.size();i++){
+				if(list.get(i).getId().equals(id) || list.get(i).getId()==id){
+					//列表中上一个对象存在时才进行操作
+					if(i+1<=list.size() && list.get(i+1)!=null){
+						BaseDic baseDic = list.get(i);
+						int tempNum = baseDic.getSeqNum();
+						BaseDic baseDicB = list.get(i+1);
+						baseDic.setSeqNum(baseDicB.getSeqNum());
+						baseDicB.setSeqNum(tempNum);
+						this.dicInfoDao.update(baseDic);
+						this.dicInfoDao.update(baseDicB);
+					}
+				}
+			}
+		}
+		
+	}
+
 }

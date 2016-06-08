@@ -37,5 +37,6 @@ public interface IDicDao extends IBaseDao {
 	* @date 2016-5-30 下午2:08:14
 	 */
 	void delDicCategoryById(String id);
+	
 
 }

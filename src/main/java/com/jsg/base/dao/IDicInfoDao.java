@@ -23,6 +23,17 @@ public interface IDicInfoDao extends IBaseDao {
 	 */
 	BasePage getDicInfoListById(int pageNo,int pageSize,BaseDic baseDic);
 
-	
-	
+	/**
+	 * 
+	* @Title: getDicInfoListByCategoryId 
+	* @Description: TODO() 
+	* @param @param DicCategoryId
+	* @param @return
+	* @return List<BaseDic>
+	* @throws 
+	* @author duanws
+	* @date 2016-6-8 上午11:33:51
+	 */
+	List<BaseDic> getDicInfoListByCategoryId(String DicCategoryId);
+
 }

@@ -1,9 +1,12 @@
 package com.jsg.base.service.impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.jsg.base.dao.IDicDao;
+import com.jsg.base.model.BaseDic;
 import com.jsg.base.model.BasePage;
 import com.jsg.base.model.DicCategory;
 import com.jsg.base.service.IDicService;
@@ -49,5 +52,39 @@ public class DicServiceImpl implements IDicService {
 	public void delDicCategoryById(String id) {
 		this.dicDao.delDicCategoryById(id);
 		
+	}
+
+	@Override
+	public boolean isExistDicCategoryCode(String id, String code) {
+		String hql = " from DicCategory dc where dc.code='"+code+"'";
+		List<DicCategory> list = this.dicDao.queryList(hql, new Object[0]);
+		if((list != null) && (list.size()>0)){
+			if(list.size()==1){
+				if(!list.get(0).getId().equals(id)){
+					return false;
+				}
+			}else if(list.size() > 1){
+				return false;
+			}
+		}
+		return true;
+	}
+
+	@Override
+	public boolean isExistDicCategoryName(String id, String name) {
+		String hql = " from DicCategory dc where dc.name='"+name+"'";
+		List<DicCategory> list = this.dicDao.queryList(hql, new Object[0]);
+		if((list != null) && (list.size()>0)){
+			if(list.size()==1){
+				if(!list.get(0).getId().equals(id)){
+					//存在
+					return false;
+				}
+			}else if(list.size() > 1){
+				//存在
+				return false;
+			}
+		}
+		return true;
 	}
 }

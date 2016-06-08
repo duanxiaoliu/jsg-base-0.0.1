@@ -52,16 +52,16 @@ public class DicController extends BaseController {
 			dicCategory.setId(dicCategoryId);
 			baseDic.setDicCategory(dicCategory);
 		}
-		
-		String pageNo = (request.getParameter("pageNo")!=null)?request.getParameter("pageNo"):"1";
-		BasePage page = this.dicInfoService.getDicInfoListById(Integer.parseInt(pageNo), BasePage.DEFAULT_PAGE_SIZE, baseDic);
-		String pageTag = PageUtil.getPageInfo((int)page.getTotalPageCount(),(int)page.getTotalCount());
 		if(DataUtil.strIsNotNull(flag) && flag.equals("1")){
 			BaseDic baseDicB = (BaseDic) session.getAttribute("baseDicB");
 			if(DataUtil.objIsNotNull(baseDicB)){
 				baseDic = baseDicB;
 			}
 		}
+		String pageNo = (request.getParameter("pageNo")!=null)?request.getParameter("pageNo"):"1";
+		BasePage page = this.dicInfoService.getDicInfoListById(Integer.parseInt(pageNo), BasePage.DEFAULT_PAGE_SIZE, baseDic);
+		String pageTag = PageUtil.getPageInfo((int)page.getTotalPageCount(),(int)page.getTotalCount());
+		
 		session.setAttribute("baseDicB", baseDic);
 		model.addAttribute("pageTag", pageTag);
 		model.addAttribute("page", page);
@@ -118,6 +118,29 @@ public class DicController extends BaseController {
 			this.dicInfoService.saveDicInfo(baseDic);
 		}
 		return "redirect:/dicManage/dicInfoManage/ope-query/queryDicInfo.do";
+	}
+	/**
+	 * 
+	* @Title: delDicInfo 
+	* @Description: TODO(删除数据字典) 
+	* @param @param request
+	* @param @param response
+	* @param @return
+	* @return String
+	* @throws 
+	* @author duanws
+	* @date 2016-6-8 下午1:30:48
+	 */
+	@RequestMapping(value={"dicManage/dicInfoManage/ope-del/delDicInfo"},produces={"text/plain;charset=UTF-8"})
+	public @ResponseBody String delDicInfo(HttpServletRequest request,HttpServletResponse response){
+		String id = request.getParameter("id");
+		try{
+			this.dicInfoService.delDicInfoById(id);
+		}catch(Exception e){
+			return "error";
+		}
+		
+		return "success";
 	}
 	/**
 	 * 
@@ -192,7 +215,98 @@ public class DicController extends BaseController {
 		}
 		return "success";
 	}
-	
+	/**
+	 * 
+	* @Title: upDicInfo 
+	* @Description: TODO(上移数据字典) 
+	* @param @param request
+	* @param @param response
+	* @param @return
+	* @return String
+	* @throws 
+	* @author duanws
+	* @date 2016-6-8 上午11:51:15
+	 */
+	@RequestMapping(value={"dicManage/dicInfoManage/ope-update/upDic"},produces={"text/plain;charset=UTF-8"})
+	public @ResponseBody String upDicInfo(HttpServletRequest request,HttpServletResponse response){
+		String id = request.getParameter("id");
+		String dicCategoryId = request.getParameter("dicCategoryId");
+		try{
+			this.dicInfoService.upDicInfo(id, dicCategoryId);
+		}catch(Exception e){
+			return "error";
+		}
+		return "success";
+	}
+	/**
+	 * 
+	* @Title: downDicInfo 
+	* @Description: TODO(下移数据字典) 
+	* @param @param request
+	* @param @param response
+	* @param @return
+	* @return String
+	* @throws 
+	* @author duanws
+	* @date 2016-6-8 上午11:51:27
+	 */
+	@RequestMapping(value={"dicManage/dicInfoManage/ope-update/downDic"},produces={"text/plain;charset=UTF-8"})
+	public @ResponseBody String downDicInfo(HttpServletRequest request,HttpServletResponse response){
+		String id = request.getParameter("id");
+		String dicCategoryId = request.getParameter("dicCategoryId");
+		try{
+			this.dicInfoService.downDicInfo(id, dicCategoryId);
+		}catch(Exception e){
+			return "error";
+		}
+		return "success";
+	}
+	/**
+	 * 
+	* @Title: checkDicNameExist 
+	* @Description: TODO(验证字典名称是否唯一) 
+	* @param @param request
+	* @param @param response
+	* @param @return
+	* @return String
+	* @throws 
+	* @author duanws
+	* @date 2016-6-8 下午4:52:58
+	 */
+	@RequestMapping(value={"dicManage/dicManage/ope-check/checkDicNameExist"},produces={"text/plain;charset=UTF-8"})
+	public @ResponseBody String checkDicNameExist(HttpServletRequest request,HttpServletResponse response){
+		String name = request.getParameter("name");
+		String id = request.getParameter("id");
+		String dicCategoryId = request.getParameter("dicCategoryId");
+		boolean checkResult = this.dicInfoService.isExistDicName(id, name, dicCategoryId);
+		if(checkResult){
+			return "true";
+		}
+		return "false";
+	}
+	/**
+	 * 
+	* @Title: checkDicCodeExist 
+	* @Description: TODO(验证字典代码是否唯一) 
+	* @param @param request
+	* @param @param response
+	* @param @return
+	* @return String
+	* @throws 
+	* @author duanws
+	* @date 2016-6-8 下午4:54:06
+	 */
+	@RequestMapping(value={"dicManage/dicManage/ope-check/checkDicCodeExist"},produces={"text/plain;charset=UTF-8"})
+	public @ResponseBody String checkDicCodeExist(HttpServletRequest request,HttpServletResponse response){
+		String code = request.getParameter("code");
+		String id = request.getParameter("id");
+		String dicCategoryId = request.getParameter("dicCategoryId");
+		boolean checkResult = this.dicInfoService.isExistDicCode(id, code, dicCategoryId);
+		if(checkResult){
+			return "true";
+		}
+		return "false";
+	}
 	/**
 	 * 
 	* @Title: setData 
@@ -206,6 +320,6 @@ public class DicController extends BaseController {
 	 */
 	private void setData(BaseDic baseDic,ModelMap model){
 		
-		
+		model.addAttribute("baseDic", baseDic);
 	}
 }
