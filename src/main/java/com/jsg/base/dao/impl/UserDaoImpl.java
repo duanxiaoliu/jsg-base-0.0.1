@@ -3,6 +3,7 @@ package com.jsg.base.dao.impl;
 import org.springframework.stereotype.Repository;
 
 import com.jsg.base.dao.IUserDao;
+import com.jsg.base.model.BasePage;
 import com.jsg.base.model.UserInfo;
 import com.jsg.base.util.DataUtil;
 
@@ -55,6 +56,24 @@ public class UserDaoImpl extends BaseDaoImpl implements IUserDao {
 	public UserInfo getUserInfoById(String id) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public BasePage queryUserInfo(int pageNo, int pageSize, UserInfo user) {
+		StringBuffer hql = new StringBuffer(" from UserInfo ui where 1=1");
+		//名称
+		if(DataUtil.strIsNotNull(user.getName())){
+			hql.append(" and ui.name like '%"+user.getName()+"%'");
+		}
+		//登录名
+		if(DataUtil.objIsNotNull(user.getUserLogin()) && DataUtil.strIsNotNull(user.getUserLogin().getLoginName())){
+			hql.append(" and ui.userLogin.loginName like '%"+user.getUserLogin().getLoginName()+"%'");
+		}
+		//性别
+		if(DataUtil.objIsNotNull(user.getGenderDic()) && DataUtil.objIsNotNull(user.getGenderDic().getId())){
+			hql.append(" and ui.genderDic.id='"+user.getGenderDic().getId()+"'");
+		}
+		return this.queryPage(hql.toString(), pageNo, pageSize, new Object[0]);
 	}
 
 }

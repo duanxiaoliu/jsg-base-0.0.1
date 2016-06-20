@@ -119,4 +119,29 @@ public interface IDicInfoService extends IBaseService {
 	* @date 2016-6-8 上午11:29:00
 	 */
 	void downDicInfo(String id,String dicCategoryId);
+	/**
+	 * 
+	* @Title: getDicListByCode 
+	* @Description: TODO(通过字典分类代码查询字典信息) 
+	* @param @param code
+	* @param @return
+	* @return List<BaseDic>
+	* @throws 
+	* @author duanws
+	* @date 2016-6-20 下午3:08:14
+	 */
+	public List<BaseDic> getDicListByCode(String code);
+	/**
+	 * 
+	* @Title: getDicInfo 
+	* @Description: TODO(通过分类编码和字典编码查询字典信息) 
+	* @param @param code分类编码
+	* @param @param dicCode字典编码
+	* @param @return
+	* @return BaseDic
+	* @throws 
+	* @author duanws
+	* @date 2016-6-20 下午3:11:17
+	 */
+	public BaseDic getDicInfo(String code,String dicCode);
 }

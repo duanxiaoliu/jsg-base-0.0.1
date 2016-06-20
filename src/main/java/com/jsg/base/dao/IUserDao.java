@@ -1,5 +1,6 @@
 package com.jsg.base.dao;
 
+import com.jsg.base.model.BasePage;
 import com.jsg.base.model.UserInfo;
 /**
  * 
@@ -10,6 +11,20 @@ import com.jsg.base.model.UserInfo;
 *
  */
 public interface IUserDao extends IBaseDao {
+	/**
+	 * 
+	* @Title: queryUserInfo 
+	* @Description: TODO(分页查询用户信息) 
+	* @param @param pageNo
+	* @param @param pageSize
+	* @param @param user
+	* @param @return
+	* @return BasePage
+	* @throws 
+	* @author duanws
+	* @date 2016-6-20 下午3:21:48
+	 */
+	BasePage queryUserInfo(int pageNo,int pageSize,UserInfo user);
 	/**
 	 * 
 	* @Title: getUserInfo 

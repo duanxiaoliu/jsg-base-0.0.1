@@ -26,7 +26,7 @@ public class dicInfoDaoImpl extends BaseDaoImpl implements IDicInfoDao {
 		if(DataUtil.strIsNotNull(baseDic.getStatus())){
 			hql.append(" and bd.status='"+baseDic.getStatus()+"'");
 		}
-		if(DataUtil.strIsNotNull(baseDic.getDicCategory().getId())){
+		if(DataUtil.objIsNotNull(baseDic.getDicCategory()) && DataUtil.strIsNotNull(baseDic.getDicCategory().getId())){
 			hql.append(" and bd.dicCategory.id='"+baseDic.getDicCategory().getId()+"'");
 		}
 		hql.append(" order by bd.seqNum");
@@ -37,6 +37,26 @@ public class dicInfoDaoImpl extends BaseDaoImpl implements IDicInfoDao {
 	public List<BaseDic> getDicInfoListByCategoryId(String dicCategoryId) {
 		String hql = " from BaseDic bd where bd.dicCategory.id='"+dicCategoryId+"' order by bd.seqNum ";
 		return this.queryList(hql, new Object[0]);
+	}
+
+	@Override
+	public List<BaseDic> getDicListByCode(String code) {
+		String hql = " from BaseDic bd where bd.dicCategory.code='"+code+"' order by bd.seqNum";
+		
+		return this.queryList(hql, new Object[0]);
+	}
+
+	@Override
+	public BaseDic getDicInfo(String code, String dicCode) {
+		String hql = " from BaseDic bd where bd.dicCategory.code='"+code+"' and bd.code='"+dicCode+"'";
+		return null;
+	}
+
+	@Override
+	public void delDicInfo(String id) {
+		String hql = " delete from BaseDic dc where dc.id='"+id+"'";
+		this.executeHql(hql, new Object[0]);
+		
 	}
 
 	

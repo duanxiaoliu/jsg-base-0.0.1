@@ -11,7 +11,9 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import net.sf.json.JSONArray;
@@ -112,12 +114,13 @@ public class DicController extends BaseController {
 	@RequestMapping({"dicManage/dicInfoManage/ope-save/saveDicInfo"})
 	public String saveDicInfo(HttpServletRequest request,BaseDic baseDic,ModelMap model){
 		String dicId = baseDic.getId();
+		String dicCategoryId = baseDic.getDicCategory().getId();
 		if(DataUtil.strIsNotNull(dicId)){
 			this.dicInfoService.updateDicInfo(baseDic);
 		}else{
 			this.dicInfoService.saveDicInfo(baseDic);
 		}
-		return "redirect:/dicManage/dicInfoManage/ope-query/queryDicInfo.do";
+		return "redirect:/dicManage/dicInfoManage/ope-query/queryDicInfo.do?dicCategoryId="+dicCategoryId;
 	}
 	/**
 	 * 
@@ -131,9 +134,8 @@ public class DicController extends BaseController {
 	* @author duanws
 	* @date 2016-6-8 下午1:30:48
 	 */
-	@RequestMapping(value={"dicManage/dicInfoManage/ope-del/delDicInfo"},produces={"text/plain;charset=UTF-8"})
-	public @ResponseBody String delDicInfo(HttpServletRequest request,HttpServletResponse response){
-		String id = request.getParameter("id");
+	@RequestMapping(value={"dicManage/dicInfoManage/ope-del/delDicInfo"},produces={"text/plain;charset=UTF-8"},method=RequestMethod.DELETE)
+	public @ResponseBody String delDicInfo(@PathVariable("id") String id,HttpServletRequest request,HttpServletResponse response){
 		try{
 			this.dicInfoService.delDicInfoById(id);
 		}catch(Exception e){

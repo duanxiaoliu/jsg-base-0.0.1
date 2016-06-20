@@ -25,7 +25,7 @@ public class DicInfoServiceImpl implements IDicInfoService {
 
 	@Override
 	public void delDicInfoById(String id) {
-		this.dicInfoDao.deleteById(BaseDic.class, id);
+		this.dicInfoDao.delDicInfo(id);
 		
 	}
 
@@ -141,6 +141,17 @@ public class DicInfoServiceImpl implements IDicInfoService {
 			}
 		}
 		
+	}
+
+	@Override
+	public List<BaseDic> getDicListByCode(String code) {
+		
+		return this.getDicListByCode(code);
+	}
+
+	@Override
+	public BaseDic getDicInfo(String code, String dicCode) {
+		return this.getDicInfo(code, dicCode);
 	}
 
 }

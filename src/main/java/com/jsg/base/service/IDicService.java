@@ -91,4 +91,6 @@ public interface IDicService extends IBaseService {
 	* @date 2016-6-6 下午3:12:14
 	 */
 	boolean isExistDicCategoryName(String id,String name);
+	
+
 }

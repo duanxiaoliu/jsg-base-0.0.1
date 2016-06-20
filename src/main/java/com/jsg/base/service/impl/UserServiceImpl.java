@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.jsg.base.dao.IUserDao;
+import com.jsg.base.model.BasePage;
 import com.jsg.base.model.UserInfo;
 import com.jsg.base.model.UserLoginInfo;
 import com.jsg.base.service.IUserService;
@@ -55,6 +56,11 @@ public class UserServiceImpl implements IUserService {
 	public void saveUserLoginInfo(UserLoginInfo loginInfo) {
 		this.userDao.save(loginInfo);
 		
+	}
+
+	@Override
+	public BasePage queryUserInfo(int pageNo, int pageSize, UserInfo user) {
+		return this.queryUserInfo(pageNo, pageSize, user);
 	}
 
 }
