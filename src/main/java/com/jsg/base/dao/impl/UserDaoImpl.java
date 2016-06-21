@@ -48,7 +48,8 @@ public class UserDaoImpl extends BaseDaoImpl implements IUserDao {
 
 	@Override
 	public void deleteUserInfoById(String id) {
-		// TODO Auto-generated method stub
+		String hql = " delete from UserInfo ui where ui.id='"+id+"'";
+		this.executeHql(hql, new Object[0]);
 		
 	}
 
@@ -75,5 +76,6 @@ public class UserDaoImpl extends BaseDaoImpl implements IUserDao {
 		}
 		return this.queryPage(hql.toString(), pageNo, pageSize, new Object[0]);
 	}
+
 
 }

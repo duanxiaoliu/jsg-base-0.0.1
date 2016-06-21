@@ -1,5 +1,7 @@
 package com.jsg.base.service.impl;
 
+import java.util.List;
+
 import org.springframework.transaction.annotation.Transactional; 
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.jsg.base.dao.IUserDao;
 import com.jsg.base.model.BasePage;
+import com.jsg.base.model.DicCategory;
 import com.jsg.base.model.UserInfo;
 import com.jsg.base.model.UserLoginInfo;
 import com.jsg.base.service.IUserService;
@@ -36,20 +39,19 @@ public class UserServiceImpl implements IUserService {
 
 	@Override
 	public void deleteUserInfo(UserInfo userInfo) {
-		// TODO Auto-generated method stub
+		
 
 	}
 
 	@Override
 	public void deleteUserInfoById(String id) {
-		// TODO Auto-generated method stub
+		this.userDao.deleteUserInfoById(id);
 
 	}
 
 	@Override
 	public UserInfo getUserInfoById(String id) {
-		// TODO Auto-generated method stub
-		return null;
+		return this.userDao.getUserInfoById(id);
 	}
 	
 	@Override
@@ -60,7 +62,23 @@ public class UserServiceImpl implements IUserService {
 
 	@Override
 	public BasePage queryUserInfo(int pageNo, int pageSize, UserInfo user) {
-		return this.queryUserInfo(pageNo, pageSize, user);
+		return this.userDao.queryUserInfo(pageNo, pageSize, user);
+	}
+
+	@Override
+	public boolean isExistUser(String id, String cerNum) {
+		String hql = " from UserInfo ui where ui.cerNum='"+cerNum+"'";
+		List<UserInfo> list = this.userDao.queryList(hql, new Object[0]);
+		if((list != null) && (list.size()>0)){
+			if(list.size()==1){
+				if(!list.get(0).getId().equals(id)){
+					return false;
+				}
+			}else if(list.size() > 1){
+				return false;
+			}
+		}
+		return true;
 	}
 
 }

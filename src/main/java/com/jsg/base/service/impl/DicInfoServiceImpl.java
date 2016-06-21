@@ -146,12 +146,12 @@ public class DicInfoServiceImpl implements IDicInfoService {
 	@Override
 	public List<BaseDic> getDicListByCode(String code) {
 		
-		return this.getDicListByCode(code);
+		return this.dicInfoDao.getDicListByCode(code);
 	}
 
 	@Override
 	public BaseDic getDicInfo(String code, String dicCode) {
-		return this.getDicInfo(code, dicCode);
+		return this.dicInfoDao.getDicInfo(code, dicCode);
 	}
 
 }

@@ -104,4 +104,17 @@ public interface IUserService extends IBaseService{
 	* @throws
 	 */
 	void saveUserLoginInfo(UserLoginInfo loginInfo);
+	/**
+	 * 
+	* @Title: isExistUser 
+	* @Description: TODO(通过证件号码检验用户是否唯一) 
+	* @param @param id
+	* @param @param cerNum
+	* @param @return
+	* @return boolean
+	* @throws 
+	* @author duanws
+	* @date 2016-6-21 下午2:57:39
+	 */
+	boolean isExistUser(String id,String cerNum);
 }

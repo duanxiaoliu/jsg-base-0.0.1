@@ -13,6 +13,8 @@ import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.support.RequestContext;
 
+import com.jsg.base.util.DataUtil;
+
 public class LoginFilter implements HandlerInterceptor{
 	  private List<String> excludedUrls;
 	  private PathMatcher pathMatcher = new AntPathMatcher();
@@ -36,8 +38,19 @@ public class LoginFilter implements HandlerInterceptor{
 	    	//操作左侧菜单列表
 			String menuPid = request.getParameter("menuPid");
 			String menuId = request.getParameter("menuId");
+			String str = request.getParameter("menutext");
+			String menuText = "";
+			if(DataUtil.strIsNotNull(str)){
+				menuText = new String (str.getBytes("ISO-8859-1"),"UTF-8");
+			}else{
+				menuText = "主页";
+			}
+			 
+
+			
 			session.setAttribute("menuPid", menuPid);
 			session.setAttribute("menuId", menuId);
+			session.setAttribute("menutext", menuText);
 	    }
 	    for (String url : this.excludedUrls) {
 	      if (pathsMatch(url, request)) {
