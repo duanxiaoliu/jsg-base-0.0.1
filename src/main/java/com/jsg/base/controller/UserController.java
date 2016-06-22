@@ -117,6 +117,7 @@ public class UserController extends BaseController {
 			loginInfo.setLoginName(loginName);
 			//密码
 			loginInfo.setPassword(md.GetMD5Code(password));
+			this.userService.saveUserLoginInfo(loginInfo);
 			user.setUserLogin(loginInfo);
 			this.userService.updateUserInfo(user);
 		}else{
@@ -125,6 +126,7 @@ public class UserController extends BaseController {
 			loginInfo.setLoginName(loginName);
 			//密码
 			loginInfo.setPassword(md.GetMD5Code(password));
+			this.userService.saveUserLoginInfo(loginInfo);
 			user.setUserLogin(loginInfo);
 			this.userService.saveUserInfo(user);
 		}
@@ -184,11 +186,33 @@ public class UserController extends BaseController {
 	* @author duanws
 	* @date 2016-6-21 下午2:59:47
 	 */
-	@RequestMapping(value={"dicManage/dicManage/ope-check/checkUserExist"},produces={"text/plain;charset=UTF-8"})
+	@RequestMapping(value={"userManage/userManage/ope-check/checkUserExist"},produces={"text/plain;charset=UTF-8"})
 	public @ResponseBody String checkUserExist(HttpServletRequest request,HttpServletResponse response){
 		String cerNum = request.getParameter("cerNum");
 		String id = request.getParameter("id");
 		boolean checkResult = this.userService.isExistUser(id, cerNum);
+		if(checkResult){
+			return "true";
+		}
+		return "false";
+	}
+	/**
+	 * 
+	* @Title: checkUserLoginNameExist 
+	* @Description: TODO(验证登录名称是否唯一) 
+	* @param @param request
+	* @param @param response
+	* @param @return
+	* @return String
+	* @throws 
+	* @author duanws
+	* @date 2016-6-22 下午3:10:34
+	 */
+	@RequestMapping(value={"userManage/userManage/ope-check/checkUserLoginNameExist"},produces={"text/plain;charset=UTF-8"})
+	public @ResponseBody String checkUserLoginNameExist(HttpServletRequest request,HttpServletResponse response){
+		String loginName = request.getParameter("loginName");
+		String id = request.getParameter("id");
+		boolean checkResult = this.userService.isLoginInfoExist(id, loginName);
 		if(checkResult){
 			return "true";
 		}
@@ -212,7 +236,10 @@ public class UserController extends BaseController {
 		List<BaseDic> genderDicList = this.dicInfoService.getDicListByCode("GENDER");
 		//状态
 		List<BaseDic> statusDicList = this.dicInfoService.getDicListByCode("STATUS");
+		//证件类型
+		List<BaseDic> cardtypeDicList = this.dicInfoService.getDicListByCode("CARDTYPE");
 		
+		model.addAttribute("cardtypeDicList", cardtypeDicList);
 		model.addAttribute("genderDicList", genderDicList);
 		model.addAttribute("statusDicList", statusDicList);
 		model.addAttribute("user", user);

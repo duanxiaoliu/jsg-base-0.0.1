@@ -81,4 +81,20 @@ public class UserServiceImpl implements IUserService {
 		return true;
 	}
 
+	@Override
+	public boolean isLoginInfoExist(String id, String loginName) {
+		String hql = " from UserInfo ui where ui.userLogin.loginName='"+loginName+"'";
+		List<UserInfo> list = this.userDao.queryList(hql, new Object[0]);
+		if((list != null) && (list.size()>0)){
+			if(list.size()==1){
+				if(!list.get(0).getId().equals(id)){
+					return false;
+				}
+			}else if(list.size() > 1){
+				return false;
+			}
+		}
+		return true;
+	}
+
 }

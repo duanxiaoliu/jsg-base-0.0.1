@@ -93,4 +93,5 @@ public interface IUserDao extends IBaseDao {
 	* @date 2016-5-6 下午2:31:46
 	 */
 	UserInfo getUserInfoById(String id);
+
 }
