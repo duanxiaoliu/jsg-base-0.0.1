@@ -33,7 +33,7 @@ public class UserServiceImpl implements IUserService {
 
 	@Override
 	public void updateUserInfo(UserInfo userInfo) {
-		// TODO Auto-generated method stub
+		this.userDao.update(userInfo);
 
 	}
 
@@ -51,7 +51,7 @@ public class UserServiceImpl implements IUserService {
 
 	@Override
 	public UserInfo getUserInfoById(String id) {
-		return this.userDao.getUserInfoById(id);
+		return (UserInfo) this.userDao.get(UserInfo.class, id);
 	}
 	
 	@Override

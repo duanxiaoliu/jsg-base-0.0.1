@@ -144,7 +144,7 @@ public class UserController extends BaseController {
 	* @author duanws
 	* @date 2016-6-21 下午2:44:05
 	 */
-	@RequestMapping(value={"userManage/userManage/ope-del/delUserInfo"},produces={"text/plain;charset=UTF-8"},method=RequestMethod.DELETE)
+	@RequestMapping(value={"userManage/userManage/ope-del/delUserInfo/{id}"},produces={"text/plain;charset=UTF-8"},method=RequestMethod.DELETE)
 	public @ResponseBody String delUser(@PathVariable("id") String id,HttpServletRequest request,ModelMap model){
 		try{
 			this.userService.deleteUserInfoById(id);
