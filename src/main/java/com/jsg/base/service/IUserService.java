@@ -106,6 +106,17 @@ public interface IUserService extends IBaseService{
 	void saveUserLoginInfo(UserLoginInfo loginInfo);
 	/**
 	 * 
+	* @Title: updateUserLoginInfo 
+	* @Description: TODO(修改登录信息) 
+	* @param @param loginInfo
+	* @return void
+	* @throws 
+	* @author duanws
+	* @date 2016-6-27 上午10:47:14
+	 */
+	void updateUserLoginInfo(UserLoginInfo loginInfo);
+	/**
+	 * 
 	* @Title: isExistUser 
 	* @Description: TODO(通过证件号码检验用户是否唯一) 
 	* @param @param id

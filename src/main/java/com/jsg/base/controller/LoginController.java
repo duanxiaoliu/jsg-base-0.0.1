@@ -30,8 +30,6 @@ public class LoginController extends BaseController {
 	
 	@Autowired
 	private IUserService userService;
-	@Autowired
-	private MD5 md;
 
 	@RequestMapping({"login"})
 	public String login(HttpServletRequest request,HttpServletResponse response,ModelMap model,UserInfo userInfo){
@@ -61,7 +59,6 @@ public class LoginController extends BaseController {
 			UserLoginInfo userLoginInfo = new UserLoginInfo();
 			userLoginInfo.setLoginName(loginName);
 			userLoginInfo.setPassword(password);
-			//userLoginInfo.setPassword(md.GetMD5Code(password));
 			userInfo.setUserLogin(userLoginInfo);
 			
 			UserInfo loginUser = this.userService.getUserInfo(userInfo);

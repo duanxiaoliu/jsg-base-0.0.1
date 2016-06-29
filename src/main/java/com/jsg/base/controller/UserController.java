@@ -31,8 +31,7 @@ public class UserController extends BaseController {
 	private IUserService userService;
 	@Autowired
 	private IDicInfoService dicInfoService;
-	@Autowired
-	private MD5 md;
+
 	/**
 	 * 
 	* @Title: queryUserInfo 
@@ -112,12 +111,13 @@ public class UserController extends BaseController {
 		String password = user.getUserLogin().getPassword();
 		
 		if(DataUtil.strIsNotNull(id)){
-			UserLoginInfo loginInfo = new UserLoginInfo();
+			UserInfo eUser = this.userService.getUserInfoById(id);
+			UserLoginInfo loginInfo = eUser.getUserLogin();
 			//登录名 
 			loginInfo.setLoginName(loginName);
 			//密码
-			loginInfo.setPassword(md.GetMD5Code(password));
-			this.userService.saveUserLoginInfo(loginInfo);
+			loginInfo.setPassword(MD5.GetMD5Code(password));
+			this.userService.updateUserLoginInfo(loginInfo);
 			user.setUserLogin(loginInfo);
 			this.userService.updateUserInfo(user);
 		}else{
@@ -125,7 +125,7 @@ public class UserController extends BaseController {
 			//登录名 
 			loginInfo.setLoginName(loginName);
 			//密码
-			loginInfo.setPassword(md.GetMD5Code(password));
+			loginInfo.setPassword(MD5.GetMD5Code(password));
 			this.userService.saveUserLoginInfo(loginInfo);
 			user.setUserLogin(loginInfo);
 			this.userService.saveUserInfo(user);

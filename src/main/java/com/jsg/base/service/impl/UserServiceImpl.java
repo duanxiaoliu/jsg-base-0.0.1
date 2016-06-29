@@ -33,6 +33,7 @@ public class UserServiceImpl implements IUserService {
 
 	@Override
 	public void updateUserInfo(UserInfo userInfo) {
+		this.userDao.clear();
 		this.userDao.update(userInfo);
 
 	}
@@ -95,6 +96,12 @@ public class UserServiceImpl implements IUserService {
 			}
 		}
 		return true;
+	}
+
+	@Override
+	public void updateUserLoginInfo(UserLoginInfo loginInfo) {
+		this.userDao.update(loginInfo);
+		
 	}
 
 }

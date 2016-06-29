@@ -5,7 +5,7 @@ import java.security.NoSuchAlgorithmException;
 
 import org.springframework.stereotype.Component;
 
-@Component("md")
+
 public class MD5 {
 	  // 全局数组
     private final static String[] strDigits = { "0", "1", "2", "3", "4", "5",

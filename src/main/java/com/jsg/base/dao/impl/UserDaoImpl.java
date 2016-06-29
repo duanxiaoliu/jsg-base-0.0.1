@@ -1,15 +1,18 @@
 package com.jsg.base.dao.impl;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.jsg.base.dao.IUserDao;
 import com.jsg.base.model.BasePage;
 import com.jsg.base.model.UserInfo;
 import com.jsg.base.util.DataUtil;
+import com.jsg.base.util.MD5;
 
 @Repository("userDao")
 public class UserDaoImpl extends BaseDaoImpl implements IUserDao {
 
+	
 	@Override
 	public UserInfo getUserInfo(UserInfo userInfo) {
 		StringBuffer hql = new StringBuffer(" from UserInfo ui where 1=1");
@@ -21,7 +24,7 @@ public class UserDaoImpl extends BaseDaoImpl implements IUserDao {
 			}
 			//密码
 			if(DataUtil.strIsNotNull(userInfo.getUserLogin().getPassword())){
-				hql.append(" and ui.userLogin.password='"+userInfo.getUserLogin().getPassword()+"'");
+				hql.append(" and ui.userLogin.password='"+MD5.GetMD5Code(userInfo.getUserLogin().getPassword())+"'");
 			}
 		}
 
