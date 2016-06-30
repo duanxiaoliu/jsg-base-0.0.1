@@ -118,7 +118,23 @@ public class LoginController extends BaseController {
 		}
 		return msg;
 	}
-	
+	/**
+	 * 
+	* @Title: unLogin 
+	* @Description: TODO(退出) 
+	* @param @param request
+	* @param @return
+	* @return String
+	* @throws 
+	* @author duanws
+	* @date 2016-6-30 下午3:15:57
+	 */
+	@RequestMapping({"unLogin"})
+	public String unLogin(HttpServletRequest request){
+		HttpSession session = request.getSession();
+		session.removeAttribute("user_key");
+		return "login/login";
+	}
 	
 	/**
 	 * 
