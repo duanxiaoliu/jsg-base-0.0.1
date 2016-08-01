@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.springframework.ui.ModelMap;
 import org.springframework.util.AntPathMatcher;
 import org.springframework.util.PathMatcher;
 import org.springframework.web.servlet.HandlerInterceptor;
@@ -32,7 +33,8 @@ public class LoginFilter implements HandlerInterceptor{
 	    
 	    String urlPath = request.getContextPath();
 	    session.setAttribute("urlPath", urlPath);
-	    session.setAttribute("session", session);
+	    //session.setAttribute("session", session);
+	   
 	    //页面操作页面跳转，左侧菜单不切换
 	    if(requestUri.indexOf("ope")<=-1){
 	    	//操作左侧菜单列表
@@ -63,6 +65,7 @@ public class LoginFilter implements HandlerInterceptor{
 	    response.sendRedirect(request.getContextPath() + "/login.do");
 	    return false;  
 	    }
+	    ModelMap model = new ModelMap();
 	    return true;
 	}  
 	  
