@@ -3,9 +3,11 @@ package com.jsg.base.util;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
+import java.util.TreeMap;
 import java.util.UUID;
 
 import net.sf.json.JSONArray;
@@ -13,7 +15,14 @@ import net.sf.json.JSONObject;
 
 import org.apache.commons.lang.RandomStringUtils;
 
-//开发帮助类
+/**
+ * 
+* @ClassName: DataUtil 
+* @Description: TODO(开发帮助类) 
+* @author duanws
+* @date 2017-3-12 下午03:09:29 
+*
+ */
 public class DataUtil {
 	/**
 	 * 
@@ -406,5 +415,44 @@ public class DataUtil {
 			return str;
 		}
 		return String.valueOf(str.charAt(index));
+	}
+	/**
+	 * 
+	* @Title: changeMapToStr 
+	* @Description: TODO(map转成字符串) 
+	* @param @param map
+	* @param @return 
+	* @return String
+	* @author duanws
+	* @throws
+	 */
+	public static String changeMapToStr(Map<Object,Object> map){
+		if(map.size()<1){
+			return null;
+		}
+		
+		StringBuilder mapStr = new StringBuilder();
+		for(Object key:map.keySet()){
+			mapStr.append(key+":"+map.get(key)+",");
+		}
+		return mapStr.toString().substring(0,mapStr.length()-1);
+	}
+	/**
+	 * 
+	* @Title: main 
+	* @Description: TODO(工具类实验) 
+	* @param @param args 
+	* @return void
+	* @author duanws
+	* @throws
+	 */
+	public static void main(String [] args){
+		Map map = new TreeMap();
+		map.put(1, 1);
+		map.put(5, 1);
+
+		
+		System.out.print(DataUtil.changeMapToStr(map));
+		
 	}
 }
